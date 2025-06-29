@@ -1,6 +1,6 @@
 const rotaAtual = window.location.pathname;
 
-const rotasValidas = ['/', '/home', '/login', '/sobre', '/contato'];
+const rotasValidas = ['/', '/welcome', '/login', '/register', '/event-add'];
 
 function verifyPath() {
     if (rotaAtual == "/") {

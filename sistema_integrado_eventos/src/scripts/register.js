@@ -1,5 +1,7 @@
+import { API_URL } from './helpers/envVariables.js';
+
 function getCursos() {
-    fetch('http://localhost:3000/curso', {
+    fetch(`${API_URL}/curso`, {
         method: 'GET'
     })
         .then(response => {
@@ -60,8 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const curso = document.getElementById('model_user_curso');
     const radios = document.getElementsByName('user_type');
     const btn = document.getElementById('register-btn');
-
-    console.log(radios);
 
     const campoMatricula = matricula.closest('.row');
     const campoCurso = curso.closest('.row');
@@ -166,9 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.idCurso = document.getElementById('model_user_curso').value.trim();
         }
 
-        console.log('Dados a serem enviados:', data);
-
-        fetch('http://localhost:3000/register', {
+        fetch(`${API_URL}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
