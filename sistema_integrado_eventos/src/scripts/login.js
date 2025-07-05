@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const data = await response.json();
-            localStorage.setItem('user', JSON.stringify({matricula: data.Matricula, email: data.Email, type_user: userType}));
+            console.log("DATA", data);
+            localStorage.setItem('user', JSON.stringify({matricula: data.Matricula, name: data.Nome, email: data.Email, CPF: data.CPF, foto_perfil: data.FotoBase64, type_user: userType}));
 
             alert('Login realizado com sucesso!');
             window.location.href = '/home';

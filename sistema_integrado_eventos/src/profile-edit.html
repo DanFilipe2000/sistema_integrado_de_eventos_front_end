@@ -119,149 +119,172 @@
   </div>
 </nav>
 <ul id="slide-nav" class="sidenav sidemenu">
-  <li class="user-wrap">
-    <div class="user-view row">
-     
-            <div class="col s3 imgarea">
-        <a href="#user" class="status available"><img class="circle" src="assets/images/menu-user.jpg" alt="menu user"></a>
+    <li class="user-wrap">
+      <div class="user-view row">
+        <div class="col s3 imgarea">
+          <a href="#user" class="status available"><img class="circle"  id="sidemenu-user-image"  src="assets/images/menu-user.jpg"
+              alt="menu user"></a>
+        </div>
+        <div class="col s9 infoarea">
+          <a href="/profile" id="sidemenu-profile-name"><span class="name">Usuário não autenticado</span></a>
+          <a href="/profile" id="sidemenu-profile-email"><span
+              class="email">Entre aqui!</span></a>
+        </div>
       </div>
-            <div class="col s9 infoarea">
-        <a href="ui-app-profile.html"><span class="name">Emma Bailey</span></a>
-        <a href="ui-app-profile.html"><span class="email">emma.bailey@gmail.com</span></a>
-      </div>
-    </div>
-    
-        
+    </li>
+
+    <li class="menulinks">
+      <ul class="collapsible">
+        <!-- Menu Data Start-->
+        <li class="sh-wrap">
+          <div class="subheader">Explore</div>
+        </li>
+        <li class="lvl1">
+          <div class=" waves-effect index">
+            <a href="/profile">
+              <i class="mdi mdi-account-search-outline"></i>
+              <span class="title">Perfil</span>
+              <div class='lvl1-tag'>Veja e edite suas informações</div>
+            </a>
+          </div>
+        </li>
+        <li class="lvl1 ">
+          <div class=" waves-effect   index ">
+            <a href="/home">
+              <i class="mdi mdi-calendar-search"></i>
+              <span class="title">Explorar Eventos</span>
+              <div class='lvl1-tag'>Principais eventos e atrações</div>
+            </a>
+          </div>
+        </li>
+        <li class="lvl1 only-participante">
+          <div class=" waves-effect   index ">
+            <a href="/profile">
+              <i class="mdi mdi-script"></i>
+              <span class="title">Meus Ingressos</span>
+              <div class='lvl1-tag'>Ingressos adquiridos</div>
+            </a>
+          </div>
+        </li>
+        <li class="lvl1 only-expositor">
+          <div class=" waves-effect   index ">
+            <a href="/event-add">
+              <i class="mdi mdi-calendar-plus"></i>
+              <span class="title">Criar Evento</span>
+              <div class='lvl1-tag'>Marque seu próximo evento.</div>
+            </a>
+          </div>
+        </li>
+        <li class="lvl1 only-expositor">
+          <div class=" waves-effect   index ">
+            <a href="/profile">
+              <i class="mdi mdi-calendar-multiple-check"></i>
+              <span class="title">Meus Eventos</span>
+              <div class='lvl1-tag'>Veja e edite seus eventos</div>
+            </a>
+          </div>
+        </li>
+        <li class="lvl1 only-expositor">
+          <div class=" waves-effect   index ">
+            <a href="/product-add">
+              <i class="mdi mdi-cart-plus"></i>
+              <span class="title">Criar Produtos</span>
+              <div class='lvl1-tag'>Crie um novo produto</div>
+            </a>
+          </div>
+        </li>
+        <li class="lvl1 only-expositor">
+          <div class=" waves-effect   index ">
+            <a href="/products-list">
+              <i class="mdi mdi-cart"></i>
+              <span class="title">Meus Produtos</span>
+              <div class='lvl1-tag'>Veja e edite seus produtos</div>
+            </a>
+          </div>
+        </li>
+        <li class="lvl1 ">
+          <div class=" waves-effect   index ">
+            <a href="/logout">
+              <i class="mdi mdi-exit-to-app"></i>
+              <span class="title">Logout</span>
+              <div class='lvl1-tag'>Veja e edite seus produtos</div>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </li>
 
 
-  </li>
+    <li class="sep-wrap">
+      <div class="divider"></div>
+    </li>
+    <li class="sh-wrap">
+      <!---<div class="subheader">Recent Chats</div>--->
+    </li>
+    <!---<li class="menu-users">
+      <ul class="collection friends contacts  z-depth-1 ">
 
 
-  <li class="menulinks">
-    <ul class="collapsible">
-      <!-- Menu Data Start-->
-    <li class="sh-wrap"><div class="subheader">Explore</div></li>
-                        <li class="lvl1 ">
-                        <div class=" waves-effect   index " >
-                            <a href="sub-home.html">
-                            <i class="mdi mdi-home-outline"></i>
-                            <span class="title">Home Pages</span><div class='lvl1-tag'>App home screens versions</div><span class="badge">11</span></a>
-                            </div>
-                        </li>
-                        <li class="lvl1 ">
-                        <div class=" waves-effect   index " >
-                            <a href="sub-screens.html">
-                            <i class="mdi mdi-script"></i>
-                            <span class="title">App Screens</span><div class='lvl1-tag'>Commonly used App Screens</div></a>
-                            </div>
-                        </li>
-                        <li class="lvl1 ">
-                        <div class=" waves-effect   index " >
-                            <a href="sub-account.html">
-                            <i class="mdi mdi-account-search-outline"></i>
-                            <span class="title">User Account</span><div class='lvl1-tag'>User dependent personal screens</div><span class="badge">4</span></a>
-                            </div>
-                        </li>
-                        <li class="lvl1 ">
-                        <div class=" waves-effect   index " >
-                            <a href="sub-userinterface.html">
-                            <i class="mdi mdi-flask-outline"></i>
-                            <span class="title">User Interface</span><div class='lvl1-tag'>Styled App UI elements</div></a>
-                            </div>
-                        </li>
-                        <li class="lvl1 ">
-                        <div class=" waves-effect   index " >
-                            <a href="sub-elements.html">
-                            <i class="mdi mdi-clipboard-outline"></i>
-                            <span class="title">Elements</span><div class='lvl1-tag'>Usable App ready sections</div></a>
-                            </div>
-                        </li>
-                        <li class="lvl1 ">
-                        <div class=" waves-effect   index " >
-                            <a href="sub-components.html">
-                            <i class="mdi mdi-cellphone-settings"></i>
-                            <span class="title">Components</span><div class='lvl1-tag'>App inbuilt UX components </div></a>
-                            </div>
-                        </li>
-                        <li class="lvl1 ">
-                        <div class=" waves-effect   index " >
-                            <a href="sub-apps-ecommerce.html">
-                            <i class="mdi mdi-cart-outline"></i>
-                            <span class="title">Shop</span><div class='lvl1-tag'>Ecommerce and shopping platform</div><span class="badge">7</span></a>
-                            </div>
-                        </li>
-                    <li class="lvl1 ">
-                    <div class="waves-effect "><a href="#" data-target="slide-settings" class="sidenav-trigger"><i class="mdi mdi-settings-outline"></i><span class="title">Settings</span><div class='lvl1-tag'>Custom App branding settings</div>  </a>
-                        </div></li>    <!-- Menu Data End-->
+        <li class="collection-item avatar  ">
+
+          <a href="#!" class='chatlink waves-effect  status idle'> <img src="assets/images/user-12.jpg"
+              alt="Daisey Brett" title="Daisey Brett" class="circle">
+            <span class="title">Daisey Brett</span>
+            <p>CEO, Tech Ind.</p>
+          </a>
+          <div class="secondary-content">
+            <span class="badge primary-bg">6</span>
+          </div>
+        </li>
 
 
-</ul>
-</li>
+        <li class="collection-item avatar  ">
+
+          <a href="#!" class='chatlink waves-effect  status offline'> <img src="assets/images/user-23.jpg"
+              alt="Jessika Nardi" title="Jessika Nardi" class="circle">
+            <span class="title">Jessika Nardi</span>
+            <p>Web Developer</p>
+          </a>
+          <div class="secondary-content">
+            <span class="badge primary-bg">2</span>
+          </div>
+        </li>
 
 
-      <li class="sep-wrap"><div class="divider"></div></li>
-    <li class="sh-wrap"><div class="subheader">Recent Chats</div></li>
-    <li class="menu-users">
-        
+        <li class="collection-item avatar  ">
+
+          <a href="#!" class='chatlink waves-effect  status available'> <img src="assets/images/user-10.jpg"
+              alt="Gabi Cuchey" title="Gabi Cuchey" class="circle">
+            <span class="title">Gabi Cuchey</span>
+            <p>Graphic Designer</p>
+          </a>
+          <div class="secondary-content">
+            <span class="badge primary-bg">9</span>
+          </div>
+        </li>
+
+
+        <li class="collection-item avatar  ">
+
+          <a href="#!" class='chatlink waves-effect  status available'> <img src="assets/images/user-42.jpg"
+              alt="Hanan Chatan" title="Hanan Chatan" class="circle">
+            <span class="title">Hanan Chatan</span>
+            <p>Graphic Designer</p>
+          </a>
+          <div class="secondary-content">
+            <span class="badge primary-bg">7</span>
+          </div>
+        </li>
 
 
 
-<ul class="collection friends contacts  z-depth-1 " >
+      </ul>
 
-  
-  <li class="collection-item avatar  ">
+    </li> --->
 
-    <a href="#!" class='chatlink waves-effect  status busy'>    <img src="assets/images/user-9.jpg" alt="Grove Stark" title="Grove Stark" class="circle">
-    <span class="title">Grove Stark</span>
-    <p>App Developer</p>
-    </a>            <div class="secondary-content">
-                      <span class="badge primary-bg">8</span>
-                  </div>
-      </li>
-
-  
-  <li class="collection-item avatar  ">
-
-    <a href="#!" class='chatlink waves-effect  status available'>    <img src="assets/images/user-26.jpg" alt="Deck Sugge" title="Deck Sugge" class="circle">
-    <span class="title">Deck Sugge</span>
-    <p>Videographer</p>
-    </a>            <div class="secondary-content">
-                      <span class="badge primary-bg">2</span>
-                  </div>
-      </li>
-
-  
-  <li class="collection-item avatar  ">
-
-    <a href="#!" class='chatlink waves-effect  status busy'>    <img src="assets/images/user-4.jpg" alt="Gisela Smohit" title="Gisela Smohit" class="circle">
-    <span class="title">Gisela Smohit</span>
-    <p>Graphic Designer</p>
-    </a>            <div class="secondary-content">
-                      <span class="badge primary-bg">4</span>
-                  </div>
-      </li>
-
-  
-  <li class="collection-item avatar  ">
-
-    <a href="#!" class='chatlink waves-effect  status busy'>    <img src="assets/images/user-25.jpg" alt="Glenda Eurl" title="Glenda Eurl" class="circle">
-    <span class="title">Glenda Eurl</span>
-    <p>Photographer</p>
-    </a>            <div class="secondary-content">
-                      <span class="badge primary-bg">3</span>
-                  </div>
-      </li>
-
-  
-
-</ul>
-
-  </li>
-
-
-<li class="copy-spacer"></li>
-<li class="copy-wrap">
-  <div class="copyright">&copy; Copyright @ themepassion</div>
+    <li class="copy-spacer"></li>
+    <li class="copy-wrap">
+      <div class="copyright">&copy; Copyright @ themepassion</div>
 
   </ul>
   <!-- END navigation -->
@@ -701,7 +724,7 @@
 
 
 
-
+<script src="./scripts/side-menu-config.js"></script>
 
 <script src="assets/js/pwa.js"></script>
 

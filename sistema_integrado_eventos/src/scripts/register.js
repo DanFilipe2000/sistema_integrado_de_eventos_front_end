@@ -1,5 +1,11 @@
 import { API_URL } from './helpers/envVariables.js';
 
+function gerarNomeImagemAleatorio(extensao = 'jpg') {
+    const timestamp = Date.now(); // ex: 1727552921873
+    const aleatorio = Math.random().toString(36).substring(2, 10); // ex: 'xkqz9w8l'
+    return `${timestamp}_${aleatorio}.${extensao}`;
+}
+
 function getCursos() {
     fetch(`${API_URL}/curso`, {
         method: 'GET'
@@ -49,7 +55,6 @@ function formatarDataISO(dataTexto) {
 
     return `${ano}-${mes}-${dia}`;
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const nome = document.getElementById('model_user_name');
@@ -148,43 +153,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btn.addEventListener('click', () => {
         const userType = document.getElementById('model_participante').checked ? 'participante' : 'expositor';
+        const imagem = document.getElementById('model_user_image').files[0];
 
-        const data = {
-            user_type: userType,
-            Nome: document.getElementById('model_user_name').value.trim(),
-            CPF: document.getElementById('model_user_cpf').value.trim().replace(/\D/g, ''), // Remove caracteres não numéricos
-            Email: document.getElementById('model_user_email').value.trim(),
-            Password: document.getElementById('model_user_password').value.trim(),
-            Fones: document.getElementById('model_user_phone').value.trim().replace(/[^a-zA-Z0-9]/g, ''),
-            DataNascimento: document.getElementById('model_user_datanascimento').value.trim() ? formatarDataISO(document.getElementById('model_user_datanascimento').value.trim()) : null,
-            type_user: userType
-        };
+        let caminhoImagem = "";
 
-        // Campos exclusivos de participante
-        if (userType === 'participante') {
-            data.Matricula = document.getElementById('model_user_matricula').value.trim();
-            data.idCurso = document.getElementById('model_user_curso').value.trim();
+        const formData = new FormData();
+
+        // Gera nome aleatório com extensão correta
+        if (imagem) {
+            const extensao = imagem.name.split('.').pop();
+            const nomeArquivo = gerarNomeImagemAleatorio(extensao);
+            caminhoImagem = `/images/profile/${nomeArquivo}`; // apenas esse path será enviado ao back
+
+            // Prepara o FormData para enviar imagem separadamente
+            formData.append('imagem', imagem);
+            formData.append('nomeArquivo', nomeArquivo);
         }
 
-        fetch(`${API_URL}/register`, {
+        // Primeiro envia a imagem ao servidor
+        fetch(`${API_URL}/image/profile`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            body: formData
         })
-            .then(response => {
-                if (response.error) {
-                    console.log(response.json());
-                    throw new Error('Erro ao registrar: ' + response.error);
+            .then(res => res.json())
+            .then(uploadRes => {
+                console.log("uploadRes", uploadRes)
+                if (uploadRes.error) throw new Error(uploadRes.error);
+
+                // Depois envia os dados de cadastro com o path da imagem
+                const data = {
+                    user_type: userType,
+                    Nome: document.getElementById('model_user_name').value.trim(),
+                    CPF: document.getElementById('model_user_cpf').value.trim().replace(/\D/g, ''),
+                    Email: document.getElementById('model_user_email').value.trim(),
+                    Password: document.getElementById('model_user_password').value.trim(),
+                    Fones: document.getElementById('model_user_phone').value.trim().replace(/[^a-zA-Z0-9]/g, ''),
+                    DataNascimento: document.getElementById('model_user_datanascimento').value.trim()
+                        ? formatarDataISO(document.getElementById('model_user_datanascimento').value.trim())
+                        : null,
+                    type_user: userType,
+                    CaminhoFoto: caminhoImagem // Aqui vai o path da imagem
+                };
+
+                if (userType === 'participante') {
+                    data.Matricula = document.getElementById('model_user_matricula').value.trim();
+                    data.idCurso = document.getElementById('model_user_curso').value.trim();
                 }
-                return response.json();
+
+                return fetch(`${API_URL}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
             })
+            .then(response => response.json())
             .then(res => {
-                if (res.error) {
-                    throw new Error(res.error);
-                }
-                console.log('Registrado com sucesso:', res);
+                if (res.error) throw new Error(res.error);
                 alert('Usuário registrado com sucesso!');
                 window.location.href = '/login';
             })
@@ -193,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(err);
             });
     });
+
 });
 
 window.addEventListener('DOMContentLoaded', () => {
