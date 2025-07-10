@@ -1,7 +1,6 @@
 import { API_URL } from './helpers/envVariables.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Recuperar parâmetro da URL
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id-event');
     if (!id) {
@@ -10,7 +9,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-        // 2. Buscar dados do evento no backend
         const response = await fetch(`${API_URL}/evento/${id}`);
         if (!response.ok) throw new Error("Erro ao buscar evento");
 
@@ -21,7 +19,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const EnderecoCompleto = `${endereco.Logradouro}, Nº ${endereco.Numero} - ${endereco.Bairro}, CEP: ${endereco.CEP}`;
 
-        // 3. Preencher os elementos HTML com os dados do evento
         document.getElementById("event-title").innerText = evento.Titulo;
         document.getElementById("event-date").innerText = formatarDatas(evento.DataInicio, evento.DataFinal);
         document.getElementById("event-location").innerText = EnderecoCompleto || 'Local não informado';
@@ -31,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const tbody = document.querySelector("table tbody");
-        tbody.innerHTML = ''; // Limpa caso já tenha conteúdo
+        tbody.innerHTML = '';
 
         evento.expositores.forEach(exp => {
             const row = document.createElement('tr');
@@ -43,7 +40,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
             tbody.appendChild(row);
         });
-
     } catch (err) {
         console.error("Erro ao carregar evento:", err);
         alert("Erro ao carregar dados do evento.");
@@ -65,7 +61,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (!idEvento) return;
 
-  // Função para verificar se já está inscrito
   async function verificarInscricao() {
     try {
       const res = await fetch(`${API_URL}/ingresso/${idParticipante}/${idEvento}`);
@@ -90,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       if (!res.ok) throw new Error('Erro ao se inscrever');
       alert('Inscrição realizada com sucesso!');
-      configurarBotao(); // atualiza o botão
+      configurarBotao();
     } catch (err) {
       console.error('Erro ao se inscrever:', err);
       alert('Erro ao se inscrever.');
@@ -114,7 +109,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Configura o botão conforme status da inscrição
   async function configurarBotao() {
     const inscrito = await verificarInscricao();
 

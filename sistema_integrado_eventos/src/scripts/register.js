@@ -151,63 +151,36 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('register-btn');
 
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
         const userType = document.getElementById('model_participante').checked ? 'participante' : 'expositor';
         const imagem = document.getElementById('model_user_image').files[0];
 
-        let caminhoImagem = "";
-
         const formData = new FormData();
 
-        // Gera nome aleatório com extensão correta
-        if (imagem) {
-            const extensao = imagem.name.split('.').pop();
-            const nomeArquivo = gerarNomeImagemAleatorio(extensao);
-            caminhoImagem = `/images/profile/${nomeArquivo}`; // apenas esse path será enviado ao back
+        formData.append('type_user', userType);
+        formData.append('Nome', document.getElementById('model_user_name').value.trim());
+        formData.append('CPF', document.getElementById('model_user_cpf').value.trim().replace(/\D/g, ''));
+        formData.append('Email', document.getElementById('model_user_email').value.trim());
+        formData.append('Password', document.getElementById('model_user_password').value.trim());
+        formData.append('Fones', document.getElementById('model_user_phone').value.trim().replace(/[^a-zA-Z0-9]/g, ''));
+        formData.append('DataNascimento', document.getElementById('model_user_datanascimento').value.trim()
+            ? formatarDataISO(document.getElementById('model_user_datanascimento').value.trim())
+            : '');
 
-            // Prepara o FormData para enviar imagem separadamente
-            formData.append('imagem', imagem);
-            formData.append('nomeArquivo', nomeArquivo);
+        if (imagem) {
+            formData.append('foto', imagem); // imagem como arquivo
         }
 
-        // Primeiro envia a imagem ao servidor
-        fetch(`${API_URL}/image/profile`, {
+        if (userType === 'participante') {
+            formData.append('Matricula', document.getElementById('model_user_matricula').value.trim());
+            formData.append('idCurso', document.getElementById('model_user_curso').value.trim());
+        }
+
+        // Envia os dados + a imagem
+        fetch(`${API_URL}/register`, {
             method: 'POST',
             body: formData
         })
-            .then(res => res.json())
-            .then(uploadRes => {
-                console.log("uploadRes", uploadRes)
-                if (uploadRes.error) throw new Error(uploadRes.error);
-
-                // Depois envia os dados de cadastro com o path da imagem
-                const data = {
-                    user_type: userType,
-                    Nome: document.getElementById('model_user_name').value.trim(),
-                    CPF: document.getElementById('model_user_cpf').value.trim().replace(/\D/g, ''),
-                    Email: document.getElementById('model_user_email').value.trim(),
-                    Password: document.getElementById('model_user_password').value.trim(),
-                    Fones: document.getElementById('model_user_phone').value.trim().replace(/[^a-zA-Z0-9]/g, ''),
-                    DataNascimento: document.getElementById('model_user_datanascimento').value.trim()
-                        ? formatarDataISO(document.getElementById('model_user_datanascimento').value.trim())
-                        : null,
-                    type_user: userType,
-                    CaminhoFoto: caminhoImagem // Aqui vai o path da imagem
-                };
-
-                if (userType === 'participante') {
-                    data.Matricula = document.getElementById('model_user_matricula').value.trim();
-                    data.idCurso = document.getElementById('model_user_curso').value.trim();
-                }
-
-                return fetch(`${API_URL}/register`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-            })
             .then(response => response.json())
             .then(res => {
                 if (res.error) throw new Error(res.error);
@@ -216,11 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(err => {
                 console.error('Erro ao registrar:', err);
-                alert(err);
+                alert(err.message || 'Erro desconhecido ao registrar.');
             });
     });
-
 });
+
 
 window.addEventListener('DOMContentLoaded', () => {
     getCursos();
